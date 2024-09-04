@@ -1,10 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const doctorRouter = require("./routes/doctors");
 const medicineRouter = require("./routes/medicines");
 const doctorMedicineRouter = require("./routes/doctor-medicines");
 const cors = require("cors");
-require("dotenv").config();
 
 // Enable CORS for all routes
 app.use(cors());
