@@ -4,19 +4,19 @@ const doctorRouter = require("./routes/doctors");
 const medicineRouter = require("./routes/medicines");
 const doctorMedicineRouter = require("./routes/doctor-medicines");
 const cors = require("cors");
+require("dotenv").config();
 
 // Enable CORS for all routes
 app.use(cors());
 
 const mongoose = require("mongoose");
 
-mongoose.connect(
-  "mongodb+srv://mihirxjain:ZcTN0wVugfwvwUoL@cluster0.rkrc1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const db = mongoose.connection;
 
