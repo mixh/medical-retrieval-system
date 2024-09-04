@@ -1,0 +1,45 @@
+GET /api/doctor-medicines: Retrieves a list of all doctor-medicine associations.
+GET /api/doctor-medicines/:id: Retrieves a single doctor-medicine association by ID.
+GET /api/doctor-medcines/:id/medicines receive a list of medicines associated with the specified doctor, along with their discounts.
+POST /api/doctor-medicines: Creates a new doctor-medicine association.
+PUT /api/doctor-medicines/:id: Updates an existing doctor-medicine association.
+DELETE /api/doctor-medicines/:id: Deletes a doctor-medicine association.
+POST /api/doctor-medicines/bulk: Creates multiple doctor-medicine associations in bulk.
+
+GET /api/medicines: Retrieves a list of all medicines.
+GET /api/medicines/:id: Retrieves a single medicine by ID.
+GET /api/medicines/search: Searches for medicines by name.
+POST /api/medicines: Creates a new medicine.
+PUT /api/medicines/:id: Updates an existing medicine.
+DELETE /api/medicines/:id: Deletes a medicine.
+
+GET /api/doctors: Retrieves a list of all doctors.
+GET /api/doctors/search: Searches for doctors by name.
+GET /api/doctors/:id: Retrieves a single doctor by ID.
+POST /api/doctors: Creates a new doctor.
+PUT /api/doctors/:id: Updates an existing doctor.
+DELETE /api/doctors/:id: Deletes a doctor.
+
+const doctorSchema = new mongoose.Schema({
+name: { type: String, required: true },
+address: String,
+phone_number: String,
+});
+
+const doctorMedicineSchema = new mongoose.Schema({
+doctor_id: {
+type: mongoose.Schema.Types.ObjectId,
+ref: "Doctor",
+required: true,
+},
+medicine_id: {
+type: mongoose.Schema.Types.ObjectId,
+ref: "Medicine",
+required: true,
+},
+discount: { type: Number, required: true },
+});
+
+const medicineSchema = new mongoose.Schema({
+name: { type: String, required: true },
+});
