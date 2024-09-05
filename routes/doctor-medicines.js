@@ -150,6 +150,29 @@ router.put("/:doctorId/medicines/:medicineId", async (req, res) => {
   }
 });
 
+// DELETE /api/doctor-medicines/:doctorId/medicines/:medicineId
+router.delete("/:doctorId/medicines/:medicineId", async (req, res) => {
+  const { doctorId, medicineId } = req.params;
+
+  try {
+    // Find and delete the existing doctor-medicine association
+    const result = await DoctorMedicine.findOneAndDelete({
+      doctor_id: doctorId,
+      medicine_id: medicineId,
+    });
+
+    if (!result) {
+      return res
+        .status(404)
+        .json({ message: "Doctor-Medicine association not found" });
+    }
+
+    res.json({ message: "Doctor-Medicine association deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting association", error });
+  }
+});
+
 // DELETE /api/doctor-medicines/:id
 router.delete("/:id", async (req, res) => {
   await DoctorMedicine.findByIdAndRemove(req.params.id);
