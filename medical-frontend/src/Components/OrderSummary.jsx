@@ -11,26 +11,53 @@ function OrderSummary() {
 
   const handleExportToExcel = () => {
     const data = [
-      ["Order Summary"],
-      ["Date", date],
+      ["ORDER FORM"],
       [],
-      ["Doctor Information"],
-      ["Name", order.doctor.name],
-      ["Address", order.doctor.address],
-      ["Phone", order.doctor.phone_number],
+      ["MILE PHARMA LLP JAIPUR"],
       [],
-      ["Medicines Ordered"],
-      ["Name", "Discount", "Quantity"],
-      ...order.medicines.map((medicine) => [
+      ["Order No.:", `${order.order_number}/${new Date().getFullYear()}`],
+      ["Date:", `${date}`],
+      [],
+      [],
+      ["To:", "The Depot Manager"],
+      ["", "Ipca Laboratories Ltd."],
+      ["City:", "JAIPUR"],
+      [],
+      ["Name & address of hospital: " + doc],
+      [],
+      ["Dear Sir,"],
+      [],
+      ["Please supply the following goods as per rates given below:"],
+      [],
+      ["SDP NO. & date:"],
+      ["", "", "SDP NO. & date:"],
+      ["Sr.No.", "Product", "Pack", "Qty", "Rates (gst extra)"],
+      ...order.medicines.map((medicine, index) => [
+        index + 1,
         medicine.medicine_name,
-        `${medicine.discount}%`,
+        medicine.pack,
         medicine.quantity,
+        `${medicine.discount}%`,
       ]),
+      [],
+      [
+        "",
+        "If the rates are as per the hospital price list please mention so in bold letters",
+      ],
+      ["Name of the person placing order:"],
+      ["Designation:"],
+      [
+        "Type of Hospital order: Telephonic / Fax / Email / collected by Ipca staff / collected by Stockiest's staff",
+      ],
+      [],
+      ["FOR --------------------------------------"],
+      [],
+      ["AUTHORISED SIGNATORY"],
     ];
 
     const ws = XLSX.utils.aoa_to_sheet(data);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Order Summary");
+    XLSX.utils.book_append_sheet(wb, ws, "Order Form");
     XLSX.writeFile(wb, `order-${doc}-${date}.xlsx`);
   };
 
@@ -61,7 +88,7 @@ ${order.medicines
   .join("\n")}
 `;
 
-    const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=&su=${encodeURIComponent(
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(
       emailSubject
     )}&body=${encodeURIComponent(emailBody)}`;
 

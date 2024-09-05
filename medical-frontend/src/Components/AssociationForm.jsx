@@ -1,4 +1,3 @@
-// AssociationForm.js
 import React, { useState } from "react";
 import {
   TextField,
@@ -18,13 +17,13 @@ import { API_URL } from "../api";
 function AssociationForm({ doctors, medicines, setDoctors, setMedicines }) {
   const [doctorId, setDoctorId] = useState("");
   const [medicineId, setMedicineId] = useState("");
-  const [discount, setDiscount] = useState(0);
+  const [discount, setDiscount] = useState(""); // Change initial state to an empty string
 
   const handleAddOrUpdateAssociation = () => {
     const data = {
       doctor_id: doctorId,
       medicine_id: medicineId,
-      discount: discount,
+      discount: discount, // This will now be a string
     };
     axios
       .post(`${API_URL}/doctor-medicines`, data)
@@ -35,7 +34,7 @@ function AssociationForm({ doctors, medicines, setDoctors, setMedicines }) {
       .catch((error) => console.error("Error updating association:", error));
     setDoctorId("");
     setMedicineId("");
-    setDiscount(0);
+    setDiscount(""); // Reset discount to an empty string after submission
   };
 
   return (
@@ -72,9 +71,9 @@ function AssociationForm({ doctors, medicines, setDoctors, setMedicines }) {
         </Box>
         <TextField
           label="Discount"
-          type="number"
+          type="text" // Change input type to text
           value={discount}
-          onChange={(e) => setDiscount(e.target.value)}
+          onChange={(e) => setDiscount(e.target.value)} // No need for number parsing
           fullWidth
           className="mb-4"
         />
