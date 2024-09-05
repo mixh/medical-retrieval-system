@@ -1,5 +1,4 @@
-export const API_URL =
-  "http://localhost:3001/api" || process.env.REACT_APP_API_URL;
+export const API_URL = process.env.REACT_APP_API_URL;
 
 console.log("API URL:", API_URL); // To verify the value is correctly loaded
 
