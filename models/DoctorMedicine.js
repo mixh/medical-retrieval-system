@@ -11,7 +11,7 @@ const doctorMedicineSchema = new mongoose.Schema({
     ref: "Medicine",
     required: true,
   },
-  discount: { type: Number, required: true },
+  discount: { type: String, required: true },
 });
 
 const DoctorMedicine = mongoose.model("DoctorMedicine", doctorMedicineSchema);
