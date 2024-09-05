@@ -41,7 +41,7 @@ function AssociationForm({ doctors, medicines, setDoctors, setMedicines }) {
   return (
     <Card className="mb-4">
       <CardContent>
-        <Typography variant="h6">Add Doctor-Medicine Association</Typography>
+        <Typography variant="h6">Add Doctor-Medicines Association</Typography>
         <Box sx={{ maxHeight: 200, overflow: "auto" }}>
           <FormControl fullWidth className="mb-4">
             <InputLabel>Select Doctor</InputLabel>
