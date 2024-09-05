@@ -73,6 +73,12 @@ router.get("/:id/medicines", async (req, res) => {
     .populate("medicine_id")
     .select("medicine_id name discount");
 
+  if (!doctorMedicines || doctorMedicines.length === 0) {
+    return res
+      .status(404)
+      .json({ message: "No medicines found for this doctor" });
+  }
+
   const medicines = doctorMedicines.map((docMed) => ({
     medicine_id: docMed.medicine_id._id,
     medicine_name: docMed.medicine_id.name,
@@ -113,6 +119,34 @@ router.put("/:id", async (req, res) => {
     res.json(doctorMedicine);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+// UPDATE discount for a specific medicine associated with a doctor
+router.put("/:doctorId/medicines/:medicineId", async (req, res) => {
+  const { doctorId, medicineId } = req.params;
+  const { discount } = req.body;
+
+  try {
+    // Find the existing doctor-medicine association
+    const doctorMedicine = await DoctorMedicine.findOne({
+      doctor_id: doctorId,
+      medicine_id: medicineId,
+    });
+
+    if (!doctorMedicine) {
+      return res
+        .status(404)
+        .json({ message: "Doctor-Medicine association not found" });
+    }
+
+    // Update the discount
+    doctorMedicine.discount = discount;
+    await doctorMedicine.save();
+
+    res.json({ message: "Discount updated successfully", doctorMedicine });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating discount", error });
   }
 });
 
