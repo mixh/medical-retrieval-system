@@ -21,6 +21,11 @@ function Navbar() {
             InformationPage
           </Link>
         </li>
+        <li>
+          <Link to="/doctor-dashboard" className="mr-4 hover:text-blue-300">
+            Doctors Info
+          </Link>
+        </li>
       </ul>
     </nav>
   );
