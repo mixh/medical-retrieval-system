@@ -73,6 +73,20 @@ const DoctorDiscountForm = () => {
     }
   };
 
+  // Handle delete association
+  const handleDeleteAssociation = async (medicineId) => {
+    try {
+      await axios.delete(
+        `${API_URL}/doctor-medicines/${selectedDoctor._id}/medicines/${medicineId}`
+      );
+      fetchMedicinesForDoctor(selectedDoctor._id); // Refresh medicines list
+      alert("Association deleted successfully");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting association", error);
+    }
+  };
+
   return (
     <div className="container mx-auto p-6">
       <Typography variant="h4" gutterBottom className="text-center mb-6">
@@ -101,7 +115,7 @@ const DoctorDiscountForm = () => {
       {selectedDoctor && (
         <div className="mt-8">
           <Typography variant="h5" gutterBottom>
-            Medicines for Dr. {selectedDoctor.name}
+            Medicines for {selectedDoctor.name}
           </Typography>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {medicines.map((medicine) => (
@@ -117,6 +131,16 @@ const DoctorDiscountForm = () => {
                     onClick={() => handleEditDiscount(medicine)}
                   >
                     Edit Discount
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    className="mt-2 ml-2"
+                    onClick={() =>
+                      handleDeleteAssociation(medicine.medicine_id)
+                    }
+                  >
+                    Delete Association
                   </Button>
                 </CardContent>
               </Card>

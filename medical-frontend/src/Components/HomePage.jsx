@@ -67,10 +67,12 @@ function HomePage() {
   const handleQuantityChange = (medicineId, quantity) => {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [medicineId]: parseInt(quantity),
+      [medicineId]: quantity, // Keep quantity as a string
     }));
+
+    // Assuming the check for valid quantity is no longer needed, or you can adjust based on your needs
     if (
-      parseInt(quantity) > 0 &&
+      quantity.trim() !== "" && // Check if the quantity is not an empty string
       !selectedMedicines.includes(
         medicines.find((m) => m.medicine_id === medicineId)
       )
@@ -144,7 +146,7 @@ function HomePage() {
                     showQuantity[medicine.medicine_id]) && (
                     <TextField
                       label="Quantity"
-                      type="number"
+                      type="text"
                       variant="outlined"
                       value={quantities[medicine.medicine_id] || ""}
                       onChange={(e) =>

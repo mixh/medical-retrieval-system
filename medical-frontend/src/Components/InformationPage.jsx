@@ -130,7 +130,7 @@ function InformationPage() {
                       {medicine.medicine_name}
                     </Typography>
                     <Typography className="text-gray-600">
-                      Discount: {medicine.discount}%
+                      Discount: {medicine.discount}
                     </Typography>
                   </CardContent>
                 </Card>
