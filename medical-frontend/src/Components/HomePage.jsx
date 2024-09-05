@@ -141,7 +141,7 @@ function HomePage() {
               >
                 <CardContent>
                   <Typography variant="h6">{medicine.medicine_name}</Typography>
-                  <Typography>Discount: {medicine.discount}%</Typography>
+                  <Typography>Discount: {medicine.discount}</Typography>
                   {(selectedMedicines.includes(medicine) ||
                     showQuantity[medicine.medicine_id]) && (
                     <TextField
