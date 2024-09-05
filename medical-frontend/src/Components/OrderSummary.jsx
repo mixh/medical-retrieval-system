@@ -61,7 +61,7 @@ ${order.medicines
   .join("\n")}
 `;
 
-    const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=&su=${encodeURIComponent(
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(
       emailSubject
     )}&body=${encodeURIComponent(emailBody)}`;
 
