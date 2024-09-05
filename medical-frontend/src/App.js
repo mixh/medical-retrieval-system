@@ -7,6 +7,7 @@ import Navbar from "./Components/Navbar";
 import AdminPage from "./Components/AdminPage";
 import InformationPage from "./Components/InformationPage";
 import DoctorDashboard from "./Components/DoctorDashboard";
+import DoctorDiscountForm from "./Components/DoctorDiscountForm";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/information" element={<InformationPage />} />
         <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+        <Route path="/discount-edit" element={<DoctorDiscountForm />} />
       </Routes>
     </BrowserRouter>
   );

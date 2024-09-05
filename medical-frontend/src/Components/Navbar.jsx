@@ -26,6 +26,11 @@ function Navbar() {
             Doctors Info
           </Link>
         </li>
+        <li>
+          <Link to="/discount-edit" className="mr-4 hover:text-blue-300">
+            Edit Discount
+          </Link>
+        </li>
       </ul>
     </nav>
   );
