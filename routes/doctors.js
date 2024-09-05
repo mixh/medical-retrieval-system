@@ -45,8 +45,15 @@ router.put("/:id", async (req, res) => {
 
 // DELETE /api/doctors/:id
 router.delete("/:id", async (req, res) => {
-  await Doctor.findByIdAndRemove(req.params.id);
-  res.json({ message: "Doctor deleted" });
+  try {
+    const doctor = await Doctor.findByIdAndDelete(req.params.id); // Use findByIdAndDelete
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+    res.json({ message: "Doctor deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting doctor", error });
+  }
 });
 
 module.exports = router;
