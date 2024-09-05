@@ -90,7 +90,7 @@ const DoctorDiscountForm = () => {
   return (
     <div className="container mx-auto p-6">
       <Typography variant="h4" gutterBottom className="text-center mb-6">
-        Doctor Dashboard
+        Doctor Dashboard delete associated medicines and change discount
       </Typography>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Doctor Cards */}
@@ -123,7 +123,7 @@ const DoctorDiscountForm = () => {
                 <CardContent>
                   <Typography variant="h6">{medicine.medicine_name}</Typography>
                   <Typography variant="body2">
-                    Discount: {medicine.discount}%
+                    Discount: {medicine.discount}
                   </Typography>
                   <Button
                     variant="outlined"
