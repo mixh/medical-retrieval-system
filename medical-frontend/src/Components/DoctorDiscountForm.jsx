@@ -18,6 +18,7 @@ const DoctorDiscountForm = () => {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [newDiscount, setNewDiscount] = useState("");
   const [open, setOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Fetch all doctors
   useEffect(() => {
@@ -31,6 +32,10 @@ const DoctorDiscountForm = () => {
     };
     fetchDoctors();
   }, []);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   // Fetch medicines for a selected doctor
   const fetchMedicinesForDoctor = async (doctorId) => {
@@ -90,8 +95,9 @@ const DoctorDiscountForm = () => {
   return (
     <div className="container mx-auto p-6">
       <Typography variant="h4" gutterBottom className="text-center mb-6">
-        Doctor Dashboard delete associated medicines and change discount
+        Doctor Dashboard: Delete Associated Medicines and Change Discount
       </Typography>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Doctor Cards */}
         {doctors.map((doctor) => (
@@ -103,7 +109,10 @@ const DoctorDiscountForm = () => {
               <Button
                 variant="contained"
                 className="mt-3"
-                onClick={() => handleSelectDoctor(doctor)}
+                onClick={() => {
+                  handleSelectDoctor(doctor);
+                  toggleSidebar(); // Open the sidebar when a doctor is selected
+                }}
               >
                 View Medicines
               </Button>
@@ -112,12 +121,16 @@ const DoctorDiscountForm = () => {
         ))}
       </div>
 
-      {selectedDoctor && (
-        <div className="mt-8">
+      {/* Sidebar for Medicines */}
+      {selectedDoctor && isSidebarOpen && (
+        <div className="fixed top-0 right-0 w-full md:w-1/3 bg-white p-4 shadow-lg h-full overflow-y-auto">
+          <Button onClick={toggleSidebar} className="mb-4">
+            Close
+          </Button>
           <Typography variant="h5" gutterBottom>
             Medicines for {selectedDoctor.name}
           </Typography>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             {medicines.map((medicine) => (
               <Card key={medicine.medicine_id} className="border shadow-lg">
                 <CardContent>
